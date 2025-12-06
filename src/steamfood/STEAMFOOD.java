@@ -11,7 +11,7 @@ public class STEAMFOOD {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);   // deschide fereastra de login
+                new Login().setVisible(true); // open window
             }
         });
     }

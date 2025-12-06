@@ -13,11 +13,11 @@ public class DBConnection {
    
     private static final String URL = "jdbc:mysql://localhost:3306/foodstem?useSSL=FALSE";
     private static final String USER = "root";
-    private static final String PASSWORD = "mcnccmcom";
+    private static final String PASSWORD = "andreiarit0n";
 
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");  // pentru 8.0.33
+            Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("MySQL JDBC Driver loaded successfully.");
         } catch (ClassNotFoundException e) {
             System.out.println("Could not load MySQL JDBC Driver: " + e.getMessage());
