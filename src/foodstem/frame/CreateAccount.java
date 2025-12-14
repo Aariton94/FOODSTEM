@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package steamfood.frame;
-import steamfood.frame.Login;
+package foodstem.frame;
+import foodstem.frame.Login;
 import javax.swing.JOptionPane;
-import steamfood.service.UserService;
+import foodstem.service.UserService;
 
 /**
  *

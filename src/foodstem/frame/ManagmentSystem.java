@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package steamfood.service;
+package foodstem.frame;
 
-
-import steamfood.frame.*;
+import javax.swing.Box;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,14 +28,37 @@ public class ManagmentSystem extends javax.swing.JFrame {
     public ManagmentSystem() {
         
         initComponents();
+
+        setLocationRelativeTo(null);
+        setResizable(false);
+
+        // configurăm zona de WRAP
+        configureWrapPanel();
         
-    // NU mai punem setSize aici
-    setLocationRelativeTo(null);  // doar centrează
-    setResizable(false);  
+        jparentMain.add(jScrollPane_Wrap, "card7");
+jparentMain.add(jScrollPane_Dessert, "card2");
+jparentMain.add(jScrollPane_Soda, "card3");
+jparentMain.add(jScrollPane_Fries, "card4");
+jparentMain.add(jScrollPane_Burger, "card5");
+jparentMain.add(jScrollPane_Sandwich, "card6");
         
         
     }
 
+    
+    
+    private void configureWrapPanel() {
+    // 2 coloane, rânduri nelimitate, 10px spațiu între carduri
+    jPanel6.setLayout(new java.awt.GridLayout(0, 2, 10, 10));
+    jPanel6.setBackground(new java.awt.Color(241, 240, 232));
+    
+    
+
+    loadWrapProducts();
+}
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,16 +109,6 @@ public class ManagmentSystem extends javax.swing.JFrame {
         jparentMain = new javax.swing.JPanel();
         jScrollPane_Wrap = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
         jScrollPane_Dessert = new javax.swing.JScrollPane();
         jPanel25 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
@@ -613,138 +628,7 @@ public class ManagmentSystem extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
-
-        jPanel4.setBackground(new java.awt.Color(241, 240, 232));
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel13.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel13.setText("Mediterranean Veggie Wrap");
-
-        jLabel14.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel14.setText("$6.99");
-
-        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("Bun/Letus/pork meat/onion");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel14)))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-
-        jPanel7.setBackground(new java.awt.Color(241, 240, 232));
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel17.setText("Chicken Cesar Wrap");
-
-        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel18.setText("$7.99");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel18)))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-
-        jPanel8.setBackground(new java.awt.Color(241, 240, 232));
-        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel22.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel22.setText("Spicy Tofu Wrap");
-
-        jLabel23.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel23.setText("$6.99");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel23)))
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(249, Short.MAX_VALUE))
-        );
-
+        jPanel6.setLayout(new java.awt.GridLayout(1, 0));
         jScrollPane_Wrap.setViewportView(jPanel6);
 
         jparentMain.add(jScrollPane_Wrap, "card7");
@@ -1745,7 +1629,69 @@ public class ManagmentSystem extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+private JPanel createProductCard(String name, double price, String description) {
+    JPanel card = new JPanel();
+    card.setBackground(new java.awt.Color(245, 245, 245)); // alb-gri
+    card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 220, 220)));
+    card.setLayout(new javax.swing.BoxLayout(card, javax.swing.BoxLayout.Y_AXIS));
 
+    JLabel nameLabel = new JLabel(name);
+    nameLabel.setFont(new java.awt.Font("Helvetica Neue", java.awt.Font.BOLD, 13));
+
+    JLabel priceLabel = new JLabel(String.format("$%.2f", price));
+
+    JLabel descLabel = new JLabel(description);
+    descLabel.setFont(new java.awt.Font("Helvetica Neue", java.awt.Font.PLAIN, 12));
+
+    JButton addButton = new JButton("Add");
+    addButton.addActionListener(e -> {
+        // când apeși pe card, adaugi produsul în coș (tabelul din dreapta)
+        DefaultTableModel model = (DefaultTableModel) jTable_1.getModel();
+        model.addRow(new Object[]{name, 1, price});
+        updateTotal();
+    });
+
+    // aliniere frumoasă
+    nameLabel.setAlignmentX(LEFT_ALIGNMENT);
+    priceLabel.setAlignmentX(LEFT_ALIGNMENT);
+    descLabel.setAlignmentX(LEFT_ALIGNMENT);
+    addButton.setAlignmentX(LEFT_ALIGNMENT);
+
+    card.add(nameLabel);
+    card.add(priceLabel);
+    card.add(descLabel);
+    card.add(Box.createVerticalStrut(5));
+    card.add(addButton);
+
+    return card;
+}
+
+private void loadWrapProducts() {
+    jPanel6.removeAll();
+
+    jPanel6.add(createProductCard(
+            "Spicy Tofu Wrap",
+            6.99,
+            "Tofu spicy, lettuce, onion"
+    ));
+
+    jPanel6.add(createProductCard(
+            "Mediterranean Veggie Wrap",
+            6.99,
+            "Hummus, feta, olives"
+    ));
+
+    jPanel6.add(createProductCard(
+            "Chicken Caesar Wrap",
+            7.99,
+            "Chicken, lettuce, Caesar sauce"
+    ));
+
+    // aici poți adăuga oricâte vrei, se vor așeza 2 pe rând
+
+    jPanel6.revalidate();
+    jPanel6.repaint();
+}
 
     private void jButton_ManagmentSystemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ManagmentSystemActionPerformed
     this.setVisible(false); 
@@ -1783,10 +1729,8 @@ public class ManagmentSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_burgerActionPerformed
 
     private void jButton_wrapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_wrapActionPerformed
-        jparentMain.removeAll();
-        jparentMain.add(jScrollPane_Wrap);
-        jparentMain.repaint();
-        jparentMain.revalidate();
+    java.awt.CardLayout cl = (java.awt.CardLayout) jparentMain.getLayout();
+    cl.show(jparentMain, "card7"); 
     }//GEN-LAST:event_jButton_wrapActionPerformed
 
     private void jButton_sandwichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sandwichActionPerformed
@@ -1800,7 +1744,7 @@ public class ManagmentSystem extends javax.swing.JFrame {
     DefaultTableModel model = (DefaultTableModel) jTable_1.getModel();
     double sum = 0;
     for (int i = 0; i < model.getRowCount(); i++) {
-        double price = (Double) model.getValueAt(i, 2); // Assuming the third column is the price
+        double price = (Double) model.getValueAt(i, 2);
         sum += price;
     }
     jtxtTotal.setText("$" + String.format("%.2f", sum));
@@ -2182,17 +2126,10 @@ public class ManagmentSystem extends javax.swing.JFrame {
     private javax.swing.JButton jButton_sandwich;
     private javax.swing.JButton jButton_soda;
     private javax.swing.JButton jButton_wrap;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -2260,11 +2197,8 @@ public class ManagmentSystem extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane_Burger;

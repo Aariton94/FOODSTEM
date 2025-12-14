@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package steamfood.service;
+package foodstem.service;
 
-import steamfood.db.DBConnection;
+import foodstem.db.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,8 @@ public class UserService {
             String role
     ) {
 
-        // 1. Simple validation
+        
+// 1. Simple validation
         if (
                 name == null || name.isBlank()
                 || username == null || username.isBlank()
@@ -39,7 +40,9 @@ public class UserService {
             return "Passwords do not match.";
         }
 
-        // 2. Check to not have the same username
+        
+
+// 2. Check to not have the same username
         String checkSql = "SELECT id FROM users WHERE username = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -54,7 +57,9 @@ public class UserService {
             return "Database error (check): " + e.getMessage();
         }
 
-        // 3. Insert new user
+        
+
+// 3. Insert new user
         String insertSql = "INSERT INTO users (name, phone, username, password, role) "
                          + "VALUES (?, ?, ?, ?, ?)";
 
@@ -79,7 +84,9 @@ public class UserService {
         }
     }
 
-    // Login
+    
+
+// Login
     public boolean login(String username, String password) {
         String sql = "SELECT id FROM users WHERE username = ? AND password = ?";
 

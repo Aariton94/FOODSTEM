@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package steamfood;
+package foodstem_main;
 
-import steamfood.frame.Login;
+import foodstem.frame.Login;
 
-public class STEAMFOOD {
+public class Foodstem {
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {

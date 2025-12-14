@@ -1,9 +1,9 @@
-package steamfood.service;
+package foodstem.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import steamfood.db.DBConnection;
+import foodstem.db.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
