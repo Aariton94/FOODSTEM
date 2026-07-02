@@ -19,12 +19,13 @@ public class CreateAccount extends javax.swing.JFrame {
      * Creates new form CreateAccount
      */
 public CreateAccount() {
-    initComponents();      // întâi creezi UI-ul
+    initComponents();      // first create UI
 
-    setLocationRelativeTo(null);  // abia ACUM o centrezi
-    setResizable(false);          // opțional
+    setLocationRelativeTo(null);  // now center it
+    setResizable(false);          
 
-    // umplere combo box
+    jButton_back.setText(" ◄ ");
+    
     jComboBox1.removeAllItems();
     java.util.List<String> roles = java.util.Arrays.asList("ADMIN", "CASHIER");
     for (String r : roles) {
@@ -242,7 +243,7 @@ public CreateAccount() {
     if ("OK".equals(result)) {
         JOptionPane.showMessageDialog(this, "Account created successfully!");
 
-        // mergem la Login după creare
+       
         new Login().setVisible(true);
         this.dispose();
     } else {

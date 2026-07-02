@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DBConnection {
 
    
-    private static final String URL = "jdbc:mysql://localhost:3306/foodstem?useSSL=FALSE";
+    private static final String URL = "jdbc:mysql://localhost:3306/foodstem";
     private static final String USER = "root";
     private static final String PASSWORD = "andreiarit0n";
 

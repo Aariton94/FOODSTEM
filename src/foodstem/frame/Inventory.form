@@ -73,7 +73,6 @@
                               <Component id="jlabelPpunit" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlabelQuantity" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlabelItemname" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jlabelItemid" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlabelTotalprice" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
@@ -81,10 +80,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jtxtPricepu" max="32767" attributes="0"/>
+                                      <Component id="jtxtPricepu" pref="242" max="32767" attributes="0"/>
                                       <Component id="jtxtQuantity" max="32767" attributes="0"/>
                                       <Component id="jtxtName" max="32767" attributes="0"/>
-                                      <Component id="jtxtItemid" min="-2" pref="242" max="-2" attributes="0"/>
                                       <Component id="jtxtTotalprice" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -140,25 +138,16 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jlabelItemid1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jtxtItemid" min="-2" pref="23" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jtxtName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jlabelItemname" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="jlabelItemid" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jtxtName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlabelItemname" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -167,15 +156,12 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jtxtPricepu" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jtxtPricepu" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jlabelPpunit" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jlabelTotalprice" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -196,7 +182,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="206" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -215,8 +201,8 @@
                   <Table columnCount="5" rowCount="1">
                     <Column editable="true" title="ID" type="java.lang.Object"/>
                     <Column editable="true" title="Item Name" type="java.lang.Object"/>
+                    <Column editable="true" title="Category" type="java.lang.Object"/>
                     <Column editable="true" title="Quantity" type="java.lang.Object"/>
-                    <Column editable="true" title="Price Per Unit" type="java.lang.Object"/>
                     <Column editable="true" title="Total Price" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -278,16 +264,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbuttonSearchActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlabelItemid">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Item ID"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtxtItemid">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxtItemidActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlabelItemname">

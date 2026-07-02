@@ -18,9 +18,8 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         
-        // ---- SETĂRI DE FEREASTRĂ COMUNE ----
-    // NU mai punem setSize aici
-    setLocationRelativeTo(null);  // doar centrează
+       
+    setLocationRelativeTo(null);  // center it
     setResizable(false);  
     }
 
@@ -213,11 +212,11 @@ public class Login extends javax.swing.JFrame {
     boolean ok = userService.login(username, password);
 
     if (ok) {
-        // deschidem fereastra principală
+        
         ManagmentSystem home = new ManagmentSystem();
         home.setVisible(true);
 
-        // închidem fereastra Login
+        
         this.dispose();
 
     } else {
@@ -232,7 +231,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButtonCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateAccountActionPerformed
     new CreateAccount().setVisible(true);
-    this.dispose(); // închide fereastra Login
+    this.dispose(); 
     }//GEN-LAST:event_jButtonCreateAccountActionPerformed
 
     private void jtxtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPasswordActionPerformed

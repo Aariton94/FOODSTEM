@@ -20,22 +20,33 @@ public class Inventory extends javax.swing.JFrame {
     
     
 public Inventory() {
-    initComponents();          // NetBeans desenează tot
+    
+    initComponents();          
 
     // NU mai punem setSize aici
-    setLocationRelativeTo(null);  // doar centrează
-    setResizable(false);          // nu lăsăm userul să o întindă
+    setLocationRelativeTo(null);  
+    setResizable(false);          
+    
+    
+    jComboBox1.removeAllItems();
+    jComboBox1.addItem("Burger");
+    jComboBox1.addItem("Wrap");
+    jComboBox1.addItem("Fries");
+    jComboBox1.addItem("Soda");
+    jComboBox1.addItem("Dessert");
+    jComboBox1.addItem("Sandwich");
 
     jTable_1.setDefaultEditor(Object.class, null);
 
     jTable_1.getSelectionModel().addListSelectionListener(e -> {
         int row = jTable_1.getSelectedRow();
         if (row >= 0) {
-            jtxtItemid.setText(jTable_1.getValueAt(row, 0).toString());
+            
             jtxtName.setText(jTable_1.getValueAt(row, 1).toString());
-            jtxtQuantity.setText(jTable_1.getValueAt(row, 2).toString());
-            jtxtPricepu.setText(jTable_1.getValueAt(row, 3).toString());
-            jtxtTotalprice.setText(jTable_1.getValueAt(row, 4).toString());
+            jComboBox1.setSelectedItem(jTable_1.getValueAt(row, 2).toString());
+            jtxtQuantity.setText(jTable_1.getValueAt(row, 3).toString());
+            jtxtPricepu.setText(jTable_1.getValueAt(row, 4).toString());
+            jtxtTotalprice.setText(jTable_1.getValueAt(row, 5).toString());
         }
     });
 
@@ -46,30 +57,36 @@ public Inventory() {
     
     
         
-        // Metodă care încarcă toate produsele din baza de date în tabel
-        private void loadTableData() {
+        // Metod that load everyting from database
+private void loadTableData() {
+    // 1. Take product
+    java.util.List<Object[]> items = inventoryService.findAllItems();
 
-            // 1. Luăm toate produsele din Inventar (din baza de date)
-            java.util.List<Object[]> items = inventoryService.findAllItems();
+    // 2. Take table model
+    DefaultTableModel model = (DefaultTableModel) jTable_1.getModel();
 
-            // 2. Luăm modelul tabelului ca să putem adăuga rânduri în el
-            DefaultTableModel model = (DefaultTableModel) jTable_1.getModel();
+    // 3. Delete
+    model.setRowCount(0);
 
-            // 3. Ștergem tot ce era în tabel înainte, ca să nu fie duplicat
-            model.setRowCount(0);
-
-            // 4. Parcurgem fiecare produs primit din baza de date
-            for (Object[] row : items) {
-
-                // 5. Adăugăm rândul în tabel
-                // row conține exact: { Item_ID, Item_Name, Quantity, Price_Per_Unit, Total_Price }
-                model.addRow(row);
-            }
-        }
+    
+    int rowNumber = 1;
+    for (Object[] row : items) {
+        // row contain: { Item_ID, Item_Name, Category, Quantity, Price_Per_Unit, Total_Price }
+        // Show in order
+        model.addRow(new Object[]{
+            rowNumber++,                    // Number order (1, 2, 3...)
+            row[1],                         // Item_Name
+            row[2],                         // Category
+            row[3],                         // Quantity
+            row[4],                         // Price_Per_Unit
+            row[5]                          // Total_Price
+        });
+    }
+}
     
     
 
-// metoda care calculează automat Total Price
+// method that calculate Total Price
 private void updateTotalPrice() {
     try {
         String qtyText = jtxtQuantity.getText().trim();
@@ -86,7 +103,7 @@ private void updateTotalPrice() {
 
         jtxtTotalprice.setText(String.format("%.2f", total));
     } catch (NumberFormatException e) {
-        // dacă se introduce ceva nevalid (ex: litere)
+        
         jtxtTotalprice.setText("");
     }
 }
@@ -111,8 +128,6 @@ private void updateTotalPrice() {
         jlabelSearch = new javax.swing.JLabel();
         jTextField_search = new javax.swing.JTextField();
         jbuttonSearch = new javax.swing.JButton();
-        jlabelItemid = new javax.swing.JLabel();
-        jtxtItemid = new javax.swing.JTextField();
         jlabelItemname = new javax.swing.JLabel();
         jtxtName = new javax.swing.JTextField();
         jlabelQuantity = new javax.swing.JLabel();
@@ -154,7 +169,7 @@ private void updateTotalPrice() {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Item Name", "Quantity", "Price Per Unit", "Total Price"
+                "ID", "Item Name", "Category", "Quantity", "Total Price"
             }
         ));
         jTable_1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -176,14 +191,6 @@ private void updateTotalPrice() {
         jbuttonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbuttonSearchActionPerformed(evt);
-            }
-        });
-
-        jlabelItemid.setText("Item ID");
-
-        jtxtItemid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtItemidActionPerformed(evt);
             }
         });
 
@@ -353,17 +360,15 @@ private void updateTotalPrice() {
                             .addComponent(jlabelPpunit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlabelQuantity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlabelItemname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlabelItemid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlabelTotalprice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxtPricepu)
+                                    .addComponent(jtxtPricepu, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                                     .addComponent(jtxtQuantity)
                                     .addComponent(jtxtName)
-                                    .addComponent(jtxtItemid, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtxtTotalprice, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -403,34 +408,25 @@ private void updateTotalPrice() {
                             .addComponent(jbuttonSearch)
                             .addComponent(jTextField_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlabelItemid1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jtxtItemid, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jlabelItemname)))
-                                    .addComponent(jlabelItemid))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlabelItemname))
                                 .addGap(19, 19, 19)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlabelQuantity)
                                     .addComponent(jtxtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jtxtPricepu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(49, 49, 49))
+                                    .addComponent(jtxtPricepu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jlabelPpunit)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(177, 177, 177)
+                                .addGap(124, 124, 124)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlabelTotalprice)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -443,7 +439,7 @@ private void updateTotalPrice() {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jbuttonModify)
                                             .addComponent(jbuttonDelete))))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -469,10 +465,6 @@ private void updateTotalPrice() {
     }//GEN-LAST:event_jbuttonHomeActionPerformed
 
     
-    private void jtxtItemidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtItemidActionPerformed
-      
-    }//GEN-LAST:event_jtxtItemidActionPerformed
-
     private void jtxtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtNameActionPerformed
 
     }//GEN-LAST:event_jtxtNameActionPerformed
@@ -492,35 +484,37 @@ private void updateTotalPrice() {
     private void jbuttonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonEnterActionPerformed
     
     
-    String itemID = jtxtItemid.getText().trim();
+    
     String itemName = jtxtName.getText().trim();
     String quantityText = jtxtQuantity.getText().trim();
     String pricePerUnitText = jtxtPricepu.getText().trim();
+    
+    String category = jComboBox1.getSelectedItem().toString();
+    
 
-    // 1. Verificăm dacă sunt completate câmpurile esențiale
-    if (itemID.isEmpty() || itemName.isEmpty() ||
+    
+    if (itemName.isEmpty() ||
         quantityText.isEmpty() || pricePerUnitText.isEmpty()) {
         
         JOptionPane.showMessageDialog(this,
                 "Please fill Item ID, Item Name, Quantity and Price Per Unit.");
-        return; // oprim aici, nu continuăm cu parse
-    }
+        return; }
 
     try {
-        // 2. Convertim în numere
+        
         int quantity = Integer.parseInt(quantityText);
         float pricePerUnit = Float.parseFloat(pricePerUnitText);
 
-        // 3. Calculăm totalul AICI (nu mai citim din totalPrice text field)
+        
         float totalPrice = quantity * pricePerUnit;
 
-        // îl afișăm în UI (doar vizual)
+        
         jtxtTotalprice.setText(String.valueOf(totalPrice));
 
-        // 4. Apelăm InventoryService pentru INSERT în DB
+        
         boolean ok = inventoryService.addItem(
-                itemID,
                 itemName,
+                category,
                 quantity,
                 pricePerUnit,
                 totalPrice
@@ -529,18 +523,10 @@ private void updateTotalPrice() {
         if (ok) {
             JOptionPane.showMessageDialog(this, "Item added successfully!");
 
-            // 5. Adăugăm rândul și în tabel
-            DefaultTableModel model = (DefaultTableModel) jTable_1.getModel();
-            model.addRow(new Object[] {
-                itemID,
-                itemName,
-                quantity,
-                pricePerUnit,
-                totalPrice
-            });
+            loadTableData();
 
             // 6. Golim câmpurile
-            jtxtItemid.setText("");
+            
             jtxtName.setText("");
             jtxtQuantity.setText("");
             jtxtPricepu.setText("");
@@ -552,7 +538,7 @@ private void updateTotalPrice() {
         }
 
     } catch (NumberFormatException ex) {
-        // dacă utilizatorul a scris litere sau ceva nevalid în quantity/price
+        
         ex.printStackTrace();
         JOptionPane.showMessageDialog(this,
                 "Enter valid numbers for Quantity and Price Per Unit.");
@@ -562,7 +548,7 @@ private void updateTotalPrice() {
     }//GEN-LAST:event_jbuttonEnterActionPerformed
 
     private void jbuttonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonClearActionPerformed
-       jtxtItemid.setText("");
+       
        jtxtName.setText("");
        jtxtQuantity.setText("");
        jtxtPricepu.setText("");
@@ -605,19 +591,24 @@ private void updateTotalPrice() {
 
     private void jbuttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonDeleteActionPerformed
   
-        int selectedRow = jTable_1.getSelectedRow();
 
+    int selectedRow = jTable_1.getSelectedRow();
     if (selectedRow == -1) {
-        // niciun rând nu e selectat
-        JOptionPane.showMessageDialog(this,
-                "Please select a product from the table to delete.");
+        JOptionPane.showMessageDialog(this, "Please select a product from the table to delete.");
         return;
     }
 
-    // luăm ID-ul produsului din prima coloană (coloana 0)
-    String itemId = jTable_1.getValueAt(selectedRow, 0).toString();
+    
+    Object idObj = jTable_1.getValueAt(selectedRow, 0);
+    int itemId;
 
-    // opțional: întrebi utilizatorul dacă e sigur
+    try {
+        itemId = Integer.parseInt(idObj.toString());
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Invalid ID in table. Make sure column 0 is Item_ID.");
+        return;
+    }
+
     int confirm = JOptionPane.showConfirmDialog(
             this,
             "Are you sure you want to delete item with ID: " + itemId + "?",
@@ -625,66 +616,59 @@ private void updateTotalPrice() {
             JOptionPane.YES_NO_OPTION
     );
 
-    if (confirm != JOptionPane.YES_OPTION) {
-        return; // dacă apasă NO, nu facem nimic
-    }
+    if (confirm != JOptionPane.YES_OPTION) return;
 
-    // apelăm metoda din service
     boolean ok = inventoryService.deleteItem(itemId);
 
     if (ok) {
-        // ștergem rândul și din tabelul din UI
-        DefaultTableModel model = (DefaultTableModel) jTable_1.getModel();
-        model.removeRow(selectedRow);
+        ((DefaultTableModel) jTable_1.getModel()).removeRow(selectedRow);
+
+        
+        jtxtName.setText("");
+        jtxtQuantity.setText("");
+        jtxtPricepu.setText("");
+        jtxtTotalprice.setText("");
 
         JOptionPane.showMessageDialog(this, "Product deleted successfully!");
     } else {
-        JOptionPane.showMessageDialog(this,
-                "Error deleting the product from database.");
+        JOptionPane.showMessageDialog(this, "Error deleting the product from database.");
     }
+    
     }//GEN-LAST:event_jbuttonDeleteActionPerformed
 
 
 
     private void jbuttonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonModifyActionPerformed
 
-        // 1. Verificăm dacă user-ul a selectat un rând din tabel
-    int selectedRow = jTable_1.getSelectedRow();
-
+ int selectedRow = jTable_1.getSelectedRow();
     if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this,
-                "Please select a product from the table to modify.");
+        JOptionPane.showMessageDialog(this, "Please select a product from the table to modify.");
         return;
     }
 
-    // 2. Luăm ID-ul din tabel (coloana 0)
-    String itemID = jTable_1.getValueAt(selectedRow, 0).toString();
+    int itemId = Integer.parseInt(jTable_1.getValueAt(selectedRow, 0).toString());
 
-    // 3. Citim valorile NOI din text fields (user-ul le poate modifica înainte)
     String itemName = jtxtName.getText().trim();
     String quantityText = jtxtQuantity.getText().trim();
     String pricePerUnitText = jtxtPricepu.getText().trim();
+    String category = jComboBox1.getSelectedItem().toString();
 
-    // 4. Validare simplă – să nu fie goale
     if (itemName.isEmpty() || quantityText.isEmpty() || pricePerUnitText.isEmpty()) {
-        JOptionPane.showMessageDialog(this,
-                "Please fill Item Name, Quantity and Price Per Unit.");
+        JOptionPane.showMessageDialog(this, "Please fill Item Name, Quantity and Price Per Unit.");
         return;
     }
 
     try {
-        // 5. Conversie în numere
         int quantity = Integer.parseInt(quantityText);
         float pricePerUnit = Float.parseFloat(pricePerUnitText);
 
-        // 6. Recalculăm total price
         float totalPrice = quantity * pricePerUnit;
         jtxtTotalprice.setText(String.format("%.2f", totalPrice));
 
-        // 7. Apelăm service-ul pentru UPDATE în baza de date
         boolean ok = inventoryService.updateItem(
-                itemID,
+                itemId,
                 itemName,
+                category,
                 quantity,
                 pricePerUnit,
                 totalPrice
@@ -693,25 +677,22 @@ private void updateTotalPrice() {
         if (ok) {
             JOptionPane.showMessageDialog(this, "Product updated successfully!");
 
-            // 8. Actualizăm și rândul din tabel (ca să se vadă imediat modificarea)
             DefaultTableModel model = (DefaultTableModel) jTable_1.getModel();
+            
             model.setValueAt(itemName, selectedRow, 1);
-            model.setValueAt(quantity, selectedRow, 2);
-            model.setValueAt(pricePerUnit, selectedRow, 3);
-            model.setValueAt(totalPrice, selectedRow, 4);
+            model.setValueAt(category, selectedRow, 2);
+            model.setValueAt(quantity, selectedRow, 3);
+            model.setValueAt(pricePerUnit, selectedRow, 4);
+            model.setValueAt(totalPrice, selectedRow, 5);
 
         } else {
-            JOptionPane.showMessageDialog(this,
-                    "Error updating the product in the database.");
+            JOptionPane.showMessageDialog(this, "Error updating the product in the database.");
         }
 
     } catch (NumberFormatException ex) {
         ex.printStackTrace();
-        JOptionPane.showMessageDialog(this,
-                "Enter valid numbers for Quantity and Price Per Unit.");
+        JOptionPane.showMessageDialog(this, "Enter valid numbers for Quantity and Price Per Unit.");
     }
-
-
 
     }//GEN-LAST:event_jbuttonModifyActionPerformed
 
@@ -760,14 +741,12 @@ private void updateTotalPrice() {
     private javax.swing.JButton jbuttonEnter;
     private javax.swing.JButton jbuttonModify;
     private javax.swing.JButton jbuttonSearch;
-    private javax.swing.JLabel jlabelItemid;
     private javax.swing.JLabel jlabelItemid1;
     private javax.swing.JLabel jlabelItemname;
     private javax.swing.JLabel jlabelPpunit;
     private javax.swing.JLabel jlabelQuantity;
     private javax.swing.JLabel jlabelSearch;
     private javax.swing.JLabel jlabelTotalprice;
-    private javax.swing.JTextField jtxtItemid;
     private javax.swing.JTextField jtxtName;
     private javax.swing.JTextField jtxtPricepu;
     private javax.swing.JTextField jtxtQuantity;
